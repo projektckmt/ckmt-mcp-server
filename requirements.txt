@@ -1,0 +1,4 @@
+# MCP Server Dependencies
+fastmcp
+httpx
+python-dotenv
