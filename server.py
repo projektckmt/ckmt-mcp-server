@@ -1,5 +1,6 @@
 """FastMCP server for CKMT search endpoints."""
 from typing import Optional
+import argparse
 import httpx
 from fastmcp import FastMCP
 from config import (
@@ -234,5 +235,20 @@ async def get_stats() -> dict:
 
 
 if __name__ == "__main__":
-    # Run the MCP server
-    mcp.run()
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser(description="CKMT MCP Server")
+    parser.add_argument(
+        "transport",
+        type=str,
+        nargs="?",
+        default="stdio",
+        choices=["stdio", "http"],
+        help="Transport type for the MCP server (default: stdio)"
+    )
+    args = parser.parse_args()
+    
+    # Map 'http' to 'streamable-http' for the MCP server
+    transport = "streamable-http" if args.transport == "http" else args.transport
+    
+    # Run the MCP server with the specified transport
+    mcp.run(transport=transport)

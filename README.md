@@ -38,8 +38,18 @@ API_KEY=your-api-key-here
 
 ### Running the Server Standalone
 
+The server supports two transport modes:
+
+**stdio (default)** - For use with MCP clients like Claude Desktop:
 ```bash
 python server.py
+# or explicitly:
+python server.py stdio
+```
+
+**http** - For HTTP-based MCP connections:
+```bash
+python server.py http
 ```
 
 ### Configuring with Claude Desktop
@@ -71,8 +81,14 @@ Replace `/path/to/ckmt-mcp-server` with the actual path to your project.
 
 The server can be used with any MCP-compatible client. Configure the client to run:
 
+**For stdio transport (default):**
 ```bash
 python /path/to/ckmt-mcp-server/server.py
+```
+
+**For HTTP transport:**
+```bash
+python /path/to/ckmt-mcp-server/server.py http
 ```
 
 ## Available Tools
